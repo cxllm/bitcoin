@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bitcoin-cli
-Version: 1.0.1
+Version: 1.0.1.post1
 Summary: Bitcoin command line tool that tells you current prices
 Home-page: https://github.com/cxllm/github-info.py
 Author: Callum
@@ -13,7 +13,7 @@ Description: # Bitcoin
         # For your user
         pip install bitcoin-cli
         # Globally
-        pip install bitcoin-cli
+        sudo pip install bitcoin-cli
         ```
         ## Usage
         The default currency is GBP, so by just running `bitcoin` you will see the price in GBP

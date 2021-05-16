@@ -4,9 +4,9 @@ with open("README.md", "r") as rd:
     long_description = rd.read()
 setup(
     name="bitcoin-cli",
-    version="1.0.1",
+    version="1.0.1-1",
     description="Bitcoin command line tool that tells you current prices",
-    url="https://github.com/cxllm/github-info.py",
+    url="https://github.com/cxllm/bitcoin",
     author="Callum",
     author_email="me@cxllm.xyz",
     classifiers=[
