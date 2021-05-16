@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+
+try:
+    import sys
+    from requests import get
+    import locale
+    from datetime import datetime
+
+    args = sys.argv
+
+    locale.setlocale(locale.LC_ALL, "")
+    symbols = {
+        "USD": "$",
+        "GBP": "£",
+        "EUR": "€",
+        "JPY": "¥",
+        "CNY": "¥",
+        "AUD": "$",
+        "CAD": "$",
+    }
+    days = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ]
+
+    def bitcoin(**kwargs):
+        try:
+            c = kwargs.get("currency").lower()
+            btc = get(
+                f"https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies={c}&include_24hr_change=true&include_last_updated_at=true"
+            )
+            btc = btc.json()["bitcoin"]
+            amount = locale.format_string(
+                "%10.2f", round(float(btc[c]), 2), grouping=True
+            ).strip()
+            if len(amount.split(".")[1]) == 1:
+                amount += "0"
+            time = datetime.now()
+            timezone = time.astimezone().tzname()
+            time = time.strftime(f"%H:%M:%S, {days[time.weekday()]} %d %B %Y")
+            symbol = symbols.get(c.upper()) or ""
+            dashes = "--------------------------------------------------"
+            print(dashes)
+            print(
+                f"\u001b[1mCurrent Bitcoin Price in {c.upper()}:\u001b[0m\n{symbol}{amount}"
+            )
+            print(dashes)
+            print(
+                f"""\u001b[1mPrice Change over 24 Hours:\u001b[0m\n{'Up' if btc[f'{c}_24h_change'] > 0 else 'Down'} {str(round(btc[f'{c}_24h_change'], 2)).replace('-', '')}%"""
+            )
+            print(dashes)
+            print(f"\u001b[1mDate & Time ({timezone}):\u001b[0m\n{time}")
+            print(dashes)
+            print("\u001b[1mSource:\u001b[0m\nCoin Gecko API (coingecko.com)")
+            print(dashes)
+        except KeyError:
+
+            print("Invalid currency provided!")
+
+    try:
+        currency = args[1]
+    except IndexError:
+        currency = "GBP"
+    bitcoin(currency=currency)
+except KeyboardInterrupt:
+    print(" Exiting...")

@@ -1,0 +1,8 @@
+README.md
+setup.py
+bin/bitcoin
+bitcoin_cli.egg-info/PKG-INFO
+bitcoin_cli.egg-info/SOURCES.txt
+bitcoin_cli.egg-info/dependency_links.txt
+bitcoin_cli.egg-info/requires.txt
+bitcoin_cli.egg-info/top_level.txt
