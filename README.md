@@ -5,7 +5,7 @@ This is a small command line tool that gives you the price of the Bitcoin crypto
 # For your user
 pip install bitcoin-cli
 # Globally
-pip install bitcoin-cli
+sudo pip install bitcoin-cli
 ```
 ## Usage
 The default currency is GBP, so by just running `bitcoin` you will see the price in GBP
